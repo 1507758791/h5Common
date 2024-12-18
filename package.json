@@ -1,0 +1,14 @@
+{
+  "name": "jorucommonh5",
+  "version": "1.0.0",
+  "description": "公众号",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jweixin-module": "^1.6.0"
+  }
+}

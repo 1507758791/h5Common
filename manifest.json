@@ -1,0 +1,233 @@
+{
+    "name" : "公众号",
+    "appid" : "__UNI__79BC7EA",
+    "description" : "",
+    "versionName" : "1.02.017",
+    "versionCode" : 240605017,
+    "transformPx" : false,
+    /* 5+App特有相关 */
+    "app-plus" : {
+        "runmode" : "liberate",
+        "compatible" : {
+            "ignoreVersion" : true //true表示忽略版本检查提示框，HBuilderX1.9.0及以上版本支持
+        },
+        "usingComponents" : true,
+        "nvueCompiler" : "uni-app",
+        "compilerVersion" : 3,
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : false,
+            "waiting" : true,
+            "autoclose" : true,
+            "delay" : 0
+        },
+        /* 模块配置 */
+        "modules" : {
+            "Maps" : {},
+            "Geolocation" : {},
+            "Camera" : {},
+            "Barcode" : {},
+            "Bluetooth" : {},
+            "VideoPlayer" : {},
+            "Webview-x5" : {}
+        },
+        "webView" : {
+            // 3.5.0 + 仅Android支持
+            "x5" : {
+                // 此属性需要勾选 Android X5 Webview 模块，详细参见下面的说明
+                "timeOut" : 3000, // 超时时间
+                "showTipsWithoutWifi" : true, // 是否在非WiFi网络环境时，显示用户确认下载x5内核的弹窗。默认值false
+                "allowDownloadWithoutWiFi" : false // 是否允许用户在非WiFi网络时进行x5内核的下载。默认值false（如果为true，就不会显示用户确认的弹窗。）
+            }
+        },
+        "privacy" : {
+            "prompt" : "template", //可取值template、custom、none
+            "template" : {}
+        },
+        /* 应用发布信息 */
+        "distribute" : {
+            /* android打包配置 */
+            "android" : {
+                "permissions" : [
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_MOCK_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+                ],
+                "abiFilters" : [ "armeabi-v7a", "arm64-v8a", "x86" ],
+                "autoSdkPermissions" : true
+            },
+            /* ios打包配置 */
+            "ios" : {
+                "idfa" : false,
+                "privacyDescription" : {
+                    "NSUserTrackingUsageDescription" : "请放心，开启权限不会获取您在其他站点的隐私信息，该权限仅用于标识设备并保障服务安全与提示浏览体验",
+                    "NSPhotoLibraryUsageDescription" : "需要获取您的个人照片以上传头像",
+                    "NSCameraUsageDescription" : "需要获取您的相机权限以上传头像",
+                    "NSLocationWhenInUseUsageDescription" : "需要获取个人位置以查找可服务的范围",
+                    "NSLocationAlwaysUsageDescription" : "需要获取个人位置以查找可服务的范围",
+                    "NSLocationAlwaysAndWhenInUseUsageDescription" : "需要获取个人位置以查找可服务的范围",
+                    "NSPhotoLibraryAddUsageDescription" : "需要获取您的相册权限以下载图片"
+                },
+                "dSYMs" : false
+            },
+            /* SDK配置 */
+            "sdkConfigs" : {
+                "ad" : {},
+                "push" : {
+                    "unipush" : {}
+                },
+                "maps" : {
+                    "amap" : {
+                        "appkey_ios" : "2e1b3f118df0a6a69677edb937c42aed",
+                        "appkey_android" : "10a96d0ae755768a81b3932879d949bb"
+                    }
+                },
+                "oauth" : {},
+                "share" : {},
+                "geolocation" : {
+                    "amap" : {
+                        "__platform__" : [ "ios", "android" ],
+                        "appkey_ios" : "2e1b3f118df0a6a69677edb937c42aed",
+                        "appkey_android" : "10a96d0ae755768a81b3932879d949bb"
+                    }
+                }
+            },
+            "splashscreen" : {
+                "androidStyle" : "common",
+                "iosStyle" : "common",
+                "useOriginalMsgbox" : false
+            },
+            "icons" : {
+                "android" : {
+                    "hdpi" : "unpackage/res/icons/72x72.png",
+                    "xhdpi" : "unpackage/res/icons/96x96.png",
+                    "xxhdpi" : "unpackage/res/icons/144x144.png",
+                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
+                },
+                "ios" : {
+                    "appstore" : "unpackage/res/icons/1024x1024.png",
+                    "ipad" : {
+                        "app" : "unpackage/res/icons/76x76.png",
+                        "app@2x" : "unpackage/res/icons/152x152.png",
+                        "notification" : "unpackage/res/icons/20x20.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "proapp@2x" : "unpackage/res/icons/167x167.png",
+                        "settings" : "unpackage/res/icons/29x29.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "spotlight" : "unpackage/res/icons/40x40.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png"
+                    },
+                    "iphone" : {
+                        "app@2x" : "unpackage/res/icons/120x120.png",
+                        "app@3x" : "unpackage/res/icons/180x180.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "notification@3x" : "unpackage/res/icons/60x60.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "settings@3x" : "unpackage/res/icons/87x87.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
+                        "spotlight@3x" : "unpackage/res/icons/120x120.png"
+                    }
+                }
+            }
+        },
+        "nativePlugins" : {},
+        "uniStatistics" : {
+            "enable" : true
+        }
+    },
+    /* 快应用特有相关 */
+    "quickapp" : {},
+    /* 小程序特有相关 */
+    "mp-weixin" : {
+        "appid" : "",
+        "setting" : {
+            "urlCheck" : false
+        },
+        "usingComponents" : true,
+        "uniStatistics" : {
+            "enable" : false
+        }
+    },
+    "mp-alipay" : {
+        "usingComponents" : true,
+        "uniStatistics" : {
+            "enable" : false
+        }
+    },
+    "mp-baidu" : {
+        "usingComponents" : true,
+        "uniStatistics" : {
+            "enable" : false
+        }
+    },
+    "mp-toutiao" : {
+        "usingComponents" : true,
+        "uniStatistics" : {
+            "enable" : false
+        }
+    },
+    "uniStatistics" : {
+        "enable" : false
+    },
+    "h5" : {
+        "uniStatistics" : {
+            "enable" : false
+        },
+        "devServer" : {
+            "disableHostCheck" : true,
+            "proxy" : {
+                "/api" : {
+                    "target" : "https://oa.joru.cn/",
+                    "secure" : false,
+                    "changOrigin" : true,
+                    "ws" : false,
+                    "pathRewrite" : {
+                        "^/api" : ""
+                    }
+                },
+                "/xbx-upload/" : {
+                    "target" : "http://192.168.1.182:8086/",
+                    "secure" : false,
+                    "changOrigin" : true,
+                    "pathRewrite" : {
+                        "^/xbx-upload/" : "/xbx-upload/"
+                    }
+                }
+            }
+        },
+        "sdkConfigs" : {
+            "maps" : {
+                "amap" : {
+                    "key" : "fd081f53127b67d518433b88863d2c26"
+                }
+            }
+        },
+        "router" : {
+            "mode" : "history",
+            "base" : "/web/"
+        }
+    },
+    "mp-qq" : {
+        "uniStatistics" : {
+            "enable" : false
+        }
+    }
+}
