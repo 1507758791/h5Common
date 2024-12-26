@@ -6,7 +6,7 @@
 		{
 			"path": "pages/newIndex/newIndex",
 			"style": {
-				"navigationBarTitleText": "查询绑定",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false
 			}
@@ -14,7 +14,7 @@
 		{
 			"path": "pages/bindFamily/bindFamily",
 			"style": {
-				"navigationBarTitleText": "查询绑定",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false
 			}
@@ -22,7 +22,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false,
 				"app-plus": {
@@ -35,7 +35,7 @@
 		{
 			"path": "pages/paySuccess101-1/paySuccess",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false,
 				"app-plus": {
@@ -48,7 +48,7 @@
 		{
 			"path": "pages/policyMatching/policyMatching",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false,
 				"app-plus": {
@@ -60,7 +60,7 @@
 		{
 			"path": "pages/inst/list",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false,
 				"app-plus": {
@@ -72,7 +72,7 @@
 		{
 			"path": "pages/policyProblems/policyProblems",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false,
 				"app-plus": {
@@ -85,7 +85,7 @@
 		{
 			"path": "pages/detail/detail",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false,
 				"app-plus": {
@@ -97,7 +97,7 @@
 		{
 			"path": "pages/familyBindList/familyBindList",
 			"style": {
-				"navigationBarTitleText": "家属绑定",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false,
 				"app-plus": {
@@ -109,7 +109,7 @@
 		{
 			"path": "pages/preBillDetail/preBillDetail",
 			"style": {
-				"navigationBarTitleText": "预缴金额账单详情",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false,
 				"app-plus": {
@@ -121,7 +121,7 @@
 		{
 			"path": "pages/billPayRecord/billPayRecord",
 			"style": {
-				"navigationBarTitleText": "缴费记录",
+				"navigationBarTitleText": "九如账单缴费",
 				"navigationStyle": "custom",
 				"enablePullDownRefresh": false,
 				"app-plus": {

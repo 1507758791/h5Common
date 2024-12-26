@@ -49,32 +49,117 @@
 					</view>
 				</view>
 			</view>
-			<view class="flex-center" v-if="detail&&!detail.billDetail.length"
+			<!-- <view class="flex-center" v-if="detail&&!detail.billDetail.length"
 				style="width: 100%;height: 400rpx;background: #fff;">
 				暂无预缴账单
-			</view>
-			<view class="pre_bill_month" v-if="detail&&detail.billDetail.length">
-				<view class="pb_title">
-					<text>预缴账单月份</text>
-					<view class="">
-						<text>{{detail.billDate}}</text>
-						<text>月</text>
-					</view>
+			</view> -->
+			<view class="pre_bill_month">
+				<view class="" style="padding-bottom: 20rpx;">
+					<u-subsection @change="sectionChange" bgColor="rgb(253, 133, 49)" active-color="rgb(252, 106, 30)"
+						inactive-color="#fff" :list="list" :current="current"></u-subsection>
 				</view>
-				<view class="pb_con" v-for="(item,index) in detail.billDetail" :key="index">
-					<text>{{item.insCostTypeName}}</text>
-					<view class="">
-						<text>¥</text>
-						<text>{{item.price}}</text>
-					</view>
+				<view class="flex-center" v-if="detail&&!detail.billDetail.length&&current == 0"
+					style="width: 100%;height: 400rpx;background: #fff;">
+					暂无预缴账单
 				</view>
-				<view class="pb_con">
-					<text>合计</text>
-					<view class="">
-						<text>¥</text>
-						<text>{{detail.billPrice}}</text>
-					</view>
+				<view class="flex-center" v-if="detailPre&&!detailPre.billDetail.length&&current == 1"
+					style="width: 100%;height: 400rpx;background: #fff;">
+					暂无账单信息
 				</view>
+				<template v-if="current == 1&&detailPre&&detailPre.billDetail.length">
+					<view class="pb_title">
+						<text>预缴账单月份</text>
+						<view class="">
+							<text>{{detailPre.billDate}}</text>
+							<text>月</text>
+						</view>
+					</view>
+					<view class="ccclose">
+						<uni-collapse>
+							<!-- 因为list默认带一条分隔线，所以使用 titleBorder="none" 取消面板的分隔线 -->
+							<uni-collapse-item
+								:show-arrow="(item.consumeRegisterDeatail&&item.consumeRegisterDeatail.length>0)?true:false"
+								:disabled="!(item.consumeRegisterDeatail&&item.consumeRegisterDeatail.length)"
+								v-for="(item,index) in detailPre.billDetail" :key="index">
+								<template v-slot:title>
+									<view class="pb_con"
+										:style="(item.consumeRegisterDeatail&&item.consumeRegisterDeatail.length>0)?'padding-right:10rpx;':''">
+										<text>{{item.insCostTypeName}}</text>
+										<view class="">
+											<text>¥</text>
+											<text>{{item.price}}</text>
+										</view>
+									</view>
+								</template>
+								<view class="child_item"
+									v-if="item.consumeRegisterDeatail&&item.consumeRegisterDeatail.length>0">
+									<view class="pb_con" v-for="(item,index) in item.consumeRegisterDeatail"
+										:key="index">
+										<text>{{item.costTypeName}}</text>
+										<view class="" style="font-weight: 400;">
+											<text style="font-weight: 400;font-size: 28rpx;">¥</text>
+											<text style="font-weight: 400;font-size: 28rpx;">{{item.price}}</text>
+										</view>
+									</view>
+								</view>
+							</uni-collapse-item>
+						</uni-collapse>
+					</view>
+
+					<!-- <template v-if="current == 0">
+						<view class="inner_item" v-for="(item,index) in detail.billDetail" :key="index"
+							@tap="item.isOpen = !item.isOpen">
+							<view class="pb_con">
+								<text>{{item.insCostTypeName}}</text>
+								<view class="">
+									<text>¥</text>
+									<text>{{item.price}}</text>
+								</view>
+							</view>
+							<view class="child_item"
+								v-if="item.consumeRegisterDeatail&&item.consumeRegisterDeatail.length>0&&item.isOpen">
+								<view class="pb_con" v-for="(item,index) in detail.billDetail" :key="index">
+									<text>{{item.insCostTypeName}}</text>
+									<view class="">
+										<text>¥</text>
+										<text>{{item.price}}</text>
+									</view>
+								</view>
+							</view>
+						</view>
+					</template> -->
+
+					<view class="pb_con">
+						<text>合计</text>
+						<view class="">
+							<text>¥</text>
+							<text>{{detailPre.billPrice}}</text>
+						</view>
+					</view>
+				</template>
+				<template v-if="current == 0&&detail&&detail.billDetail.length">
+					<view class="pb_title">
+						<text>预缴账单月份</text>
+						<view class="">
+							<text>{{detail.billDate}}</text>
+							<text>月</text>
+						</view>
+					</view>
+					<view class="pb_con" v-for="(item,index) in detail.billDetail" :key="index">
+						<text>{{item.insCostTypeName}}</text>
+						<view class="">
+							<text>¥</text>
+							<text>{{item.price}}</text>
+						</view>
+					</view>
+					<view class="pb_con">
+						<text>合计</text>
+						<view class="">
+							<text>¥</text>
+							<text>{{detail.billPrice}}</text>
+						</view>
+					</view>
+				</template>
 
 			</view>
 
@@ -83,10 +168,13 @@
 					<text>预计缴费金额</text>
 					<view class="">
 						<text>¥</text>
-						<text>{{detail.billPrice}}</text>
+						<text>{{finalPay}}</text>
 					</view>
 				</view>
-				<view class="field">
+				<view class="field flex-items-center flex-justify-between" style="justify-content: space-between;">
+					<text style="margin-right: 20rpx;font-size: 16px;
+    color: #38322F;
+    line-height: 22px;">其他金额 </text>
 					<input class="uni-input" type="digit" v-model="changeValue"
 						placeholder-style="font-size:30rpx;color:rgba(56,50,47,0.5);font-weight:400;"
 						placeholder="输入其他金额" />
@@ -110,11 +198,21 @@
 		data() {
 			return {
 				title: '预缴金额账单详情',
-				btnAct: '进行缴费',
+				btnAct: '进行充值缴费',
 				personId: '',
 				detail: '',
+				detailPre:'',
 				baseInfo: {},
 				changeValue: '',
+				finalPay: 0,
+				list: [{
+						name: '当月账单'
+					},
+					{
+						name: '上月账单'
+					}
+				],
+				current: 0
 			}
 		},
 		async onLoad(e) {
@@ -122,12 +220,13 @@
 			if (e.personId) {
 				this.personId = e.personId
 				await this.getPersonBillDetail()
+				await this.getPersonBillDetailPre()
 				this.getSignature()
 			}
 			if (e.info) {
 				this.baseInfo = JSON.parse(e.info)
 			}
-			
+
 		},
 		onShow() {
 			// this.getAppLastVersion();
@@ -137,6 +236,9 @@
 
 		},
 		methods: {
+			sectionChange(index) {
+				this.current = index;
+			},
 			initSdk(info) {
 				this.infos = info
 				console.log(info, window.location.href, encodeURIComponent(window.location.href))
@@ -149,7 +251,7 @@
 					jsApiList: ['chooseWXPay'], // 必填，需要使用的JS接口列表
 					success: (res) => {
 						console.log(res)
-						
+
 						// wx.ready(() => {
 
 						// })
@@ -161,21 +263,29 @@
 			},
 			goBack() {
 				let canNavBack = getCurrentPages()
-				if(canNavBack && canNavBack.length>1) {  
-				    uni.navigateBack() 
-				} else {  
-				    history.back();  
+				if (canNavBack && canNavBack.length > 1) {
+					uni.navigateBack()
+				} else {
+					history.back();
 				}
 			},
 			async getPersonBillDetail() {
-				
+
 				let params = {
 					personId: this.personId,
 				}
 				let data = await Api.apiCall('get', Api.api.getBillYuGuDetailByPersonId, params, true)
 				console.log(data);
 				if (data && data.data) {
+					
 					this.detail = data.data
+					// this.detail.personBalance = 9999
+					let dd = this.detail.personBalance - this.detail.billPrice
+					if ((this.detail.personBalance - this.detail.billPrice) > 0) {
+						this.finalPay = 0
+					} else {
+						this.finalPay = Math.abs((this.detail.personBalance - this.detail.billPrice).toFixed(2))
+					}
 				} else {
 					uni.showToast({
 						title: '错误',
@@ -183,6 +293,151 @@
 					})
 				}
 
+			},
+			async getPersonBillDetailPre() {
+			
+				let params = {
+					personId: this.personId,
+				}
+				// let data = await Api.apiCall('get', Api.api.getBillYuGuDetailByPersonId, params, true)
+				let data = await Api.apiCall('get', Api.api.getBillDetailByPersonId, params, true)
+				console.log(data);
+				if (data && data.data) {
+					// this.detail = data.data
+					let datas = data.data
+					// let data = {
+					// 	"billId": 637225,
+					// 	"personId": 192768,
+					// 	"identity": "066666",
+					// 	"bedName": "3",
+					// 	"billDeposit": "0.00",
+					// 	"perosnName": "孙浩铭",
+					// 	"isCheckName": "已核对 ",
+					// 	"isCheck": 2,
+					// 	"billPrice": "6831.00",
+					// 	"billDate": "2023-08",
+					// 	"startDate": "2023-08-01",
+					// 	"endDate": "2023-08-31",
+					// 	"remak": "",
+					// 	"countDay": "31",
+					// 	"billDetail": [{
+					// 		"billDetailId": 5221454,
+					// 		"insCostTypeId": 1336,
+					// 		"insCostTypeName": "护理费",
+					// 		"price": "1860.00",
+					// 		"checkPrice": "1860.00",
+					// 		"newCheckPrice": "1860.00",
+					// 		"isCheck": 0,
+					// 		"type": 1,
+					// 		"afkPrice": "0.00"
+					// 	}, {
+					// 		"billDetailId": 5221455,
+					// 		"insCostTypeId": 1338,
+					// 		"insCostTypeName": "餐饮费",
+					// 		"price": "930.00",
+					// 		"checkPrice": "930.00",
+					// 		"newCheckPrice": "930.00",
+					// 		"isCheck": 0,
+					// 		"type": 1,
+					// 		"afkPrice": "0.00"
+					// 	}, {
+					// 		"billDetailId": 5221456,
+					// 		"insCostTypeId": 1337,
+					// 		"insCostTypeName": "床位费",
+					// 		"price": "3100.00",
+					// 		"checkPrice": "3100.00",
+					// 		"newCheckPrice": "3100.00",
+					// 		"isCheck": 0,
+					// 		"type": 1,
+					// 		"afkPrice": "0.00"
+					// 	}, {
+					// 		"billDetailId": 5221457,
+					// 		"insCostTypeId": 2146,
+					// 		"insCostTypeName": "水费费用",
+					// 		"price": "341.00",
+					// 		"checkPrice": "341.00",
+					// 		"newCheckPrice": "341.00",
+					// 		"isCheck": 0,
+					// 		"type": 1,
+					// 		"afkPrice": "0.00"
+					// 	}, {
+					// 		"billDetailId": 5221458,
+					// 		"insCostTypeId": 2239,
+					// 		"insCostTypeName": "电费费用",
+					// 		"price": "0.00",
+					// 		"checkPrice": "0.00",
+					// 		"newCheckPrice": "0.00",
+					// 		"isCheck": 0,
+					// 		"type": 1,
+					// 		"afkPrice": "0.00"
+					// 	}, {
+					// 		"billDetailId": 5221459,
+					// 		"insCostTypeId": "",
+					// 		"insCostTypeName": "代收代付",
+					// 		"price": "0.00",
+					// 		"checkPrice": "0.00",
+					// 		"newCheckPrice": "0.00",
+					// 		"isCheck": 0,
+					// 		"type": 4,
+					// 		"afkPrice": "0.00"
+					// 	}, {
+					// 		"billDetailId": 5221460,
+					// 		"insCostTypeId": "",
+					// 		"insCostTypeName": "临时收费",
+					// 		"consumeRegisterDeatail": [],
+					// 		"price": "0.00",
+					// 		"checkPrice": "0.00",
+					// 		"newCheckPrice": "0.00",
+					// 		"isCheck": 0,
+					// 		"type": 5,
+					// 		"afkPrice": "0.00"
+					// 	}, {
+					// 		"billDetailId": 5221461,
+					// 		"insCostTypeId": "",
+					// 		"insCostTypeName": "临时收费-节假日收费(月结)",
+					// 		"price": "100.00",
+					// 		"checkPrice": "100.00",
+					// 		"newCheckPrice": "100.00",
+					// 		"isCheck": 0,
+					// 		"type": 13,
+					// 		"afkPrice": "0.00"
+					// 	}, {
+					// 		"billDetailId": 5221462,
+					// 		"insCostTypeId": "",
+					// 		"insCostTypeName": "临时收费-已结算(不计入账单)",
+					// 		"consumeRegisterDeatail": [{
+					// 			"costTypeName": "医疗消费",
+					// 			"price": "1.00",
+					// 			"date": "2023-05-17",
+					// 			"type": 1,
+					// 			"remark": "孙浩铭长者于2023-05-17 15:58:37导入医疗消费1.00元,月份:2023-05"
+					// 		}, {
+					// 			"costTypeName": "医疗消费",
+					// 			"price": "2.00",
+					// 			"date": "2023-05-17",
+					// 			"type": 1,
+					// 			"remark": "孙浩铭长者于2023-05-17 16:06:58导入医疗消费2.00元,月份:2023-05"
+					// 		}],
+					// 		"price": "3.00",
+					// 		"checkPrice": "3.00",
+					// 		"newCheckPrice": "3.00",
+					// 		"isCheck": 0,
+					// 		"type": 6,
+					// 		"afkPrice": "0.00"
+					// 	}]
+					// }
+					datas.billDetail.forEach(item => {
+						item.isOpen = false
+					})
+					this.detailPre = datas
+					// this.detail.personBalance = 9999
+				} else {
+					uni.showToast({
+						title: '错误',
+						icon: 'error'
+					})
+				}
+			
 			},
 			async getSignature() {
 				let params = {
@@ -199,9 +454,17 @@
 						icon: 'error'
 					})
 				}
-			
+
 			},
 			async payAmount() {
+				if(this.finalPay <= 0&&(!this.changeValue.trim() || this.changeValue.trim() == 0)){
+					uni.showModal({
+						title:'温馨提示',
+						content:'账户余额充足无需缴费,如想要充值,您可手动填入其他充值金额',
+						confirmText:'好的'
+					})
+					return
+				}
 				wx.ready(res => {
 					wx.checkJsApi({
 						jsApiList: ['chooseWXPay'],
@@ -214,35 +477,52 @@
 					})
 				})
 				if (!this.changeValue.trim() || this.changeValue.trim() == 0) {
-					let params = {
-						price: this.detail.billPrice,
-						openId: uni.getStorageSync('openid'),
-						personId: this.personId,
-						url: encodeURIComponent(window.location.href)
-					}
-					let data = await Api.apiCall('get', Api.api.addTracelessOrderForH5, params, true)
-					if (data) {
-						let payInfo = data.data
-						wx.chooseWXPay({
-							timestamp: payInfo.timeStamp, // 时间戳
-							nonceStr: payInfo.nonceStr, // 随机数
-							package: payInfo.package, //订单详情扩展字符串
-							signType: 'MD5',
-							paySign: payInfo.paySign, // 签名
-							success: () => {
-								this.$u.toast("支付成功!")
-								setTimeout(() => {
-									// uni.navigateBack()
-								}, 1500);
-							},
-							cancel: function() {
-								this.$u.toast("取消支付")
-							},
-							fail: function() {
-								this.$u.toast("支付失败")
+					uni.showModal({
+						title: '提醒',
+						content: `本次账单费用应缴${this.finalPay}元,是否确认缴费!`,
+						success: async (res) => {
+							if (res.confirm) {
+								if (this.finalPay > 0) {
+									let params = {
+										price: this.finalPay,
+										openId: uni.getStorageSync('openid'),
+										personId: this.personId,
+										url: encodeURIComponent(window.location.href)
+									}
+									let data = await Api.apiCall('get', Api.api.addTracelessOrderForH5,
+										params,
+										true)
+									if (data) {
+										let payInfo = data.data
+										wx.chooseWXPay({
+											timestamp: payInfo.timeStamp, // 时间戳
+											nonceStr: payInfo.nonceStr, // 随机数
+											package: payInfo.package, //订单详情扩展字符串
+											signType: 'MD5',
+											paySign: payInfo.paySign, // 签名
+											success: () => {
+												this.$u.toast("支付成功!")
+												setTimeout(() => {
+													// uni.navigateBack()
+												}, 1500);
+											},
+											cancel: function() {
+												this.$u.toast("取消支付")
+											},
+											fail: function() {
+												this.$u.toast("支付失败")
+											}
+										})
+									}
+								} else {
+									this.$u.toast("支付成功!")
+								}
+
 							}
-						})
-					}
+
+						}
+					})
+
 				} else {
 					let params = {
 						price: this.changeValue.trim(),
@@ -501,6 +781,47 @@
 				}
 			}
 
+			.inner_item {
+				.child_item {
+					padding: 0 0 0 32rpx;
+					background: rgb(255, 247, 237);
+
+					.pb_con {
+						padding: 0 40rpx;
+						display: flex;
+						justify-content: space-between;
+						width: 100%;
+						height: fit-content;
+						padding-bottom: 8rpx;
+						padding-top: 8rpx;
+						border-bottom: 1rpx solid rgba(56, 50, 47, 0.10);
+
+						&>text {
+							// height: 45rpx;
+							font-size: 28rpx;
+							color: #38322F;
+							line-height: 45rpx;
+						}
+
+						&>view {
+							&>text:first-child {
+								// height: 33rpx;
+								font-size: 22rpx;
+								color: #38322F;
+								line-height: 33rpx;
+							}
+
+							&>text:last-child {
+								// height: 45rpx;
+								font-size: 28rpx;
+								color: #38322F;
+								line-height: 45rpx;
+							}
+						}
+					}
+				}
+			}
+
 			.pb_con {
 				padding: 0 40rpx;
 				display: flex;
@@ -615,6 +936,109 @@
 					padding-left: 20rpx;
 				}
 			}
+		}
+	}
+
+
+
+	.ccclose {
+		.pb_con {
+			padding: 0 40rpx;
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			height: fit-content;
+			padding-bottom: 25rpx;
+			padding-top: 28rpx;
+			border-bottom: 1rpx solid rgba(56, 50, 47, 0.10);
+
+			&>text {
+				// height: 45rpx;
+				font-size: 32rpx;
+				color: #38322F;
+				line-height: 45rpx;
+			}
+
+			&>view {
+				&>text:first-child {
+					// height: 33rpx;
+					font-size: 24rpx;
+					color: #38322F;
+					line-height: 33rpx;
+				}
+
+				&>text:last-child {
+					// height: 45rpx;
+					font-size: 32rpx;
+					color: #38322F;
+					line-height: 45rpx;
+				}
+			}
+		}
+
+		.pb_con:last-child {
+			border-bottom: none;
+
+			&>view {
+				&>text:first-child {
+					height: 33rpx;
+					font-size: 24rpx;
+					color: #38322F;
+					line-height: 33rpx;
+					// font-weight: 500;
+				}
+
+				&>text:last-child {
+					height: 45rpx;
+					font-size: 32rpx;
+					color: #38322F;
+					line-height: 45rpx;
+					// font-weight: 500;
+				}
+			}
+		}
+
+		.child_item {
+			padding: 0 0 0 32rpx;
+			background: rgb(255, 247, 237);
+
+			.pb_con {
+				padding: 0 40rpx;
+				display: flex;
+				justify-content: space-between;
+				width: 100%;
+				height: fit-content;
+				padding-bottom: 8rpx;
+				padding-top: 8rpx;
+				border-bottom: 1rpx solid rgba(56, 50, 47, 0.10);
+
+				&>text {
+					// height: 45rpx;
+					font-size: 28rpx;
+					color: #38322F;
+					line-height: 45rpx;
+				}
+
+				&>view {
+					&>text:first-child {
+						// height: 33rpx;
+						font-size: 22rpx;
+						color: #38322F;
+						line-height: 33rpx;
+					}
+
+					&>text:last-child {
+						// height: 45rpx;
+						font-size: 28rpx;
+						color: #38322F;
+						line-height: 45rpx;
+					}
+				}
+			}
+		}
+
+		/deep/ .uni-collapse-item__title-arrow {
+			margin-right: 10rpx;
 		}
 	}
 </style>

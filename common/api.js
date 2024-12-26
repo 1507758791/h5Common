@@ -26,20 +26,20 @@ export default {
 	// erdsUrl: 'https://eldszhyl.ylaow.cn/',
 	
 	
-	// BASEURL: '/api',
-	// shareUrl: '/',
-	// BASEURI: '/',
-	// ESURI: '/',
-	// FamilyUrl: 'http://192.168.1.212:8089/',
-	// // appId:'wx8ec95e2b2902127e',
-	// appId:'wx4589c30e9c4c3126',//生产
-	
-	BASEURL: 'https://oa.joru.cn/',
-	shareUrl: 'https://oa.joru.cn/',
-	BASEURI: 'https://oa.joru.cn/',
-	ESURI: 'https://oa.joru.cn/',
-	FamilyUrl: 'https://oa.joru.cn/',
+	BASEURL: '/api',
+	shareUrl: '/',
+	BASEURI: '/',
+	ESURI: '/',
+	FamilyUrl: 'http://192.168.1.212:8089/',
+	// appId:'wx8ec95e2b2902127e',
 	appId:'wx4589c30e9c4c3126',//生产
+	
+	// BASEURL: 'https://oa.joru.cn/',
+	// shareUrl: 'https://oa.joru.cn/',
+	// BASEURI: 'https://oa.joru.cn/',
+	// ESURI: 'https://oa.joru.cn/',
+	// FamilyUrl: 'https://oa.joru.cn/',
+	// appId:'wx4589c30e9c4c3126',//生产
 	
 	// BASEURL: 'http://192.168.1.212:8089/',
 	// shareUrl: 'http://192.168.1.212:8089/',
@@ -76,10 +76,11 @@ export default {
 		wxSaveBindPerson:'/org/wxBindPerson/save',//绑定老人
 		getPersonInfoByNameAndIdentity:'/org/wxBindPerson/getPersonInfoByNameAndIdentity',//名字和身份证获取老人信息
 		getBillYuGuDetailByPersonId:'/org/wxBindPerson/getBillYuGuDetailByPersonId',//根据personId获取预估账单
-		addTracelessOrderForH5:'/export/wxBindPerson/addTracelessOrderForH5',//H5扣费
+		addTracelessOrderForH5:'/org/wxBindPerson/addTracelessOrderForH5',//H5扣费
 		getWxICBCOrderByPersonId:'/org/wxBindPerson/getWxICBCOrderByPersonId',//H5扣费记录
-		getWxTicket:'export/wxBindPerson/getWxTicket',//H5支付签名
-		getInfoForOrder:'export/getWxICBCOrderByOrderNo',//订单信息
+		getWxTicket:'org/wxBindPerson/getWxTicket',//H5支付签名
+		getInfoForOrder:'org/getWxICBCOrderByOrderNo',//订单信息
+		getBillDetailByPersonId:'/org/wxBindPerson/getBillDetailByPersonId',//订单信息
 	
 	},
 	debounce(method, delay, duration) {

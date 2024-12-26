@@ -4,7 +4,7 @@
 			<image @tap="goBack" src="https://xbx.obs.myhuaweicloud.com/jorujiahu/H5/bindOlder/navibackicon.png"
 				mode=""></image>
 			<view class="naviTitle">
-
+				查询家属
 			</view>
 		</view>
 		<view class="query_img">

@@ -38,8 +38,8 @@
 				</view>
 			</template>
 			<template v-else>
-				<view class="list_opt" v-for="(item,index) in list" :key="index"
-					@tap="$u.route('/pages/preBillDetail/preBillDetail?personId='+item.personId+'&info='+ JSON.stringify(item) )">
+				<view class="list_opt" :style="item.isTui == 1?'background:#d2d2d2;opacity:0.7;':''" v-for="(item,index) in list" :key="index"
+					@tap="item.isTui == 1?'':$u.route('/pages/preBillDetail/preBillDetail?personId='+item.personId+'&info='+ JSON.stringify(item))">
 					<image :src="item.portraitPic?item.portraitPic:'https://xbx.obs.myhuaweicloud.com/jorujiahu/H5/bindOlder/headimg_default.png'" mode="">
 					</image>
 					<view class="opt_item">
