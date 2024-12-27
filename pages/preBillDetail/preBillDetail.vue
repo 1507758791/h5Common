@@ -165,7 +165,7 @@
 
 			<view class="could_pay_amount" v-if="detail&&detail.billDetail.length">
 				<view class="pb_con">
-					<text>预计缴费金额</text>
+					<text>本次需预缴金额</text>
 					<view class="">
 						<text>¥</text>
 						<text>{{finalPay}}</text>
@@ -174,7 +174,7 @@
 				<view class="field flex-items-center flex-justify-between" style="justify-content: space-between;">
 					<text style="margin-right: 20rpx;font-size: 16px;
     color: #38322F;
-    line-height: 22px;">其他金额 </text>
+    line-height: 22px;">本次充值金额 </text>
 					<input class="uni-input" type="digit" v-model="changeValue"
 						placeholder-style="font-size:30rpx;color:rgba(56,50,47,0.5);font-weight:400;"
 						placeholder="输入其他金额" />
@@ -206,7 +206,7 @@
 				changeValue: '',
 				finalPay: 0,
 				list: [{
-						name: '当月账单'
+						name: '当月预缴'
 					},
 					{
 						name: '上月账单'
