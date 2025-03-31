@@ -212,7 +212,8 @@
                         "^/xbx-upload/" : "/xbx-upload/"
                     }
                 }
-            }
+            },
+            "https" : false
         },
         "sdkConfigs" : {
             "maps" : {

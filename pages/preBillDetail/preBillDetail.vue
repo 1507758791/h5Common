@@ -145,13 +145,57 @@
 							<text>月</text>
 						</view>
 					</view>
-					<view class="pb_con" v-for="(item,index) in detail.billDetail" :key="index">
-						<text>{{item.insCostTypeName}}</text>
-						<view class="">
-							<text>¥</text>
-							<text>{{item.price}}</text>
-						</view>
+					<view class="ccclose">
+						<uni-collapse>
+							<!-- 因为list默认带一条分隔线，所以使用 titleBorder="none" 取消面板的分隔线 -->
+							<uni-collapse-item
+								:show-arrow="(item.consumeRegisterDeatail&&item.consumeRegisterDeatail.length>0)?true:false"
+								:disabled="!(item.consumeRegisterDeatail&&item.consumeRegisterDeatail.length)"
+								 v-for="(item,index) in detail.billDetail" :key="index">
+								<template v-slot:title>
+									<view class="pb_con"
+										:style="(item.consumeRegisterDeatail&&item.consumeRegisterDeatail.length>0)?'padding-right:10rpx;':''">
+										<text>{{item.insCostTypeName}}</text>
+										<view class="">
+											<text>¥</text>
+											<text>{{item.price}}</text>
+										</view>
+									</view>
+								</template>
+								<view class="child_item"
+									v-if="item.consumeRegisterDeatail&&item.consumeRegisterDeatail.length>0">
+									<view class="pb_con" v-for="(item,index) in item.consumeRegisterDeatail"
+										:key="index">
+										<text>{{item.costTypeName}}</text>
+										<view class="" style="font-weight: 400;">
+											<text style="font-weight: 400;font-size: 28rpx;">¥</text>
+											<text style="font-weight: 400;font-size: 28rpx;">{{item.price}}</text>
+										</view>
+									</view>
+								</view>
+							</uni-collapse-item>
+						</uni-collapse>
 					</view>
+					<!-- <template  v-for="(item,index) in detail.billDetail">
+						<view class="pb_con" :key="index">
+							<text>{{item.insCostTypeName}}</text>
+							<view class="">
+								<text>¥</text>
+								<text>{{item.price}}</text>
+							</view>
+						</view>
+						<view class="child_item" v-if="item.consumeRegisterDeatail&&item.consumeRegisterDeatail.length>0">
+							<view class="pb_con" v-for="(item,index) in item.consumeRegisterDeatail" :key="index">
+								<text>{{item.costTypeName}}</text>
+								<view class="" style="font-weight: 400;">
+									<text style="font-weight: 400;font-size: 28rpx;">¥</text>
+									<text style="font-weight: 400;font-size: 28rpx;">{{item.price}}</text>
+								</view>
+							</view>
+						</view>
+					</template> -->
+					
+					
 					<view class="pb_con">
 						<text>合计</text>
 						<view class="">
@@ -163,7 +207,7 @@
 
 			</view>
 
-			<view class="could_pay_amount" v-if="detail&&detail.billDetail.length">
+			<view class="could_pay_amount" v-if="detail&&detail.billDetail.length&&current == 0">
 				<view class="pb_con">
 					<text>本次需预缴金额</text>
 					<view class="">
@@ -181,7 +225,7 @@
 				</view>
 			</view>
 
-			<view class="btn" v-if="detail&&detail.billDetail.length">
+			<view class="btn" v-if="detail&&detail.billDetail.length&&current == 0">
 				<u-button type="primary" @click="payAmount"
 					:custom-style="{background:'rgba(252, 106, 30, 1)',fontSize:'34rpx',height: '88rpx'}">{{btnAct}}</u-button>
 			</view>
@@ -201,7 +245,7 @@
 				btnAct: '进行充值缴费',
 				personId: '',
 				detail: '',
-				detailPre:'',
+				detailPre: '',
 				baseInfo: {},
 				changeValue: '',
 				finalPay: 0,
@@ -277,7 +321,7 @@
 				let data = await Api.apiCall('get', Api.api.getBillYuGuDetailByPersonId, params, true)
 				console.log(data);
 				if (data && data.data) {
-					
+
 					this.detail = data.data
 					// this.detail.personBalance = 9999
 					let dd = this.detail.personBalance - this.detail.billPrice
@@ -295,7 +339,7 @@
 
 			},
 			async getPersonBillDetailPre() {
-			
+
 				let params = {
 					personId: this.personId,
 				}
@@ -437,7 +481,7 @@
 						icon: 'error'
 					})
 				}
-			
+
 			},
 			async getSignature() {
 				let params = {
@@ -457,11 +501,11 @@
 
 			},
 			async payAmount() {
-				if(this.finalPay <= 0&&(!this.changeValue.trim() || this.changeValue.trim() == 0)){
+				if (this.finalPay <= 0 && (!this.changeValue.trim() || this.changeValue.trim() == 0)) {
 					uni.showModal({
-						title:'温馨提示',
-						content:'账户余额充足无需缴费,如想要充值,您可手动填入其他充值金额',
-						confirmText:'好的'
+						title: '温馨提示',
+						content: '账户余额充足无需缴费,如想要充值,您可手动填入其他充值金额',
+						confirmText: '好的'
 					})
 					return
 				}

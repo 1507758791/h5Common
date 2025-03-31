@@ -26,19 +26,26 @@ export default {
 	// erdsUrl: 'https://eldszhyl.ylaow.cn/',
 	
 	
-	BASEURL: '/api',
-	shareUrl: '/',
-	BASEURI: '/',
-	ESURI: '/',
-	FamilyUrl: 'http://192.168.1.212:8089/',
+	// BASEURL: '/api',
+	// shareUrl: '/',
+	// BASEURI: '/',
+	// ESURI: '/',
+	// FamilyUrl: 'http://192.168.1.212:8089/',
 	// appId:'wx8ec95e2b2902127e',
+	// appId:'wx4589c30e9c4c3126',//生产
+	
+	BASEURL: 'https://oa.joru.cn/',
+	shareUrl: 'https://oa.joru.cn/',
+	BASEURI: 'https://oa.joru.cn/',
+	ESURI: 'https://oa.joru.cn/',
+	FamilyUrl: 'https://oa.joru.cn/',
 	appId:'wx4589c30e9c4c3126',//生产
 	
-	// BASEURL: 'https://oa.joru.cn/',
-	// shareUrl: 'https://oa.joru.cn/',
-	// BASEURI: 'https://oa.joru.cn/',
-	// ESURI: 'https://oa.joru.cn/',
-	// FamilyUrl: 'https://oa.joru.cn/',
+	// BASEURL: 'http://oa.joru.cn:8019/',
+	// shareUrl: 'http://oa.joru.cn:8019/',
+	// BASEURI: 'http://oa.joru.cn:8019/',
+	// ESURI: 'http://oa.joru.cn:8019/',
+	// FamilyUrl: 'http://oa.joru.cn:8019/',
 	// appId:'wx4589c30e9c4c3126',//生产
 	
 	// BASEURL: 'http://192.168.1.212:8089/',
